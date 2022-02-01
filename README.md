@@ -1,2 +1,5 @@
-# uvc-portal-api
-Repositório contém projeto da API do portal Uma Vida com Cristo
+# UVC Portal Backend
+
+#### Repositório utilizado para implementar backend do portal Uma Vida com Cristo
+
+- Em desenvolvimento
