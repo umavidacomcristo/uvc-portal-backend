@@ -1,6 +1,6 @@
 package com.UVCLabs.uvcportalbackend.domain.repository;
 
-import com.UVCLabs.uvcportalbackend.domain.model.PortalUser;
+import com.UVCLabs.uvcportalbackend.domain.models.PortalUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

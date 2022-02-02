@@ -1,4 +1,4 @@
-package com.UVCLabs.uvcportalbackend.domain.model;
+package com.UVCLabs.uvcportalbackend.domain.models;
 
 import com.UVCLabs.uvcportalbackend.domain.ValidationGroups;
 import lombok.Getter;
@@ -35,8 +35,10 @@ public class PortalUser {
     private String lastName;
     @NotNull
     @Email
+    @Size(max = 50)
     private String email;
     @NotNull
+    @Size(max = 10)
     private String passwordHash;
     @NotNull
     private LocalDateTime registeredAt;

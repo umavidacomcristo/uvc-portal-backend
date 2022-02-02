@@ -1,7 +1,7 @@
 package com.UVCLabs.uvcportalbackend.domain.service;
 
 import com.UVCLabs.uvcportalbackend.domain.exception.BusinessException;
-import com.UVCLabs.uvcportalbackend.domain.model.PortalUser;
+import com.UVCLabs.uvcportalbackend.domain.models.PortalUser;
 import com.UVCLabs.uvcportalbackend.domain.repository.PortalUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
