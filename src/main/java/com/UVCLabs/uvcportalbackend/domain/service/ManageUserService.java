@@ -1,8 +1,9 @@
 package com.UVCLabs.uvcportalbackend.domain.service;
 
+import com.UVCLabs.uvcportalbackend.api.models.requests.UserUpdateReqDTO;
 import com.UVCLabs.uvcportalbackend.domain.exception.BusinessException;
-import com.UVCLabs.uvcportalbackend.domain.models.PortalUser;
-import com.UVCLabs.uvcportalbackend.domain.repository.PortalUserRepository;
+import com.UVCLabs.uvcportalbackend.domain.models.User;
+import com.UVCLabs.uvcportalbackend.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +13,33 @@ import java.util.Optional;
 public class ManageUserService {
 
     @Autowired
-    private PortalUserRepository portalUserRepository;
+    private UserRepository userRepository;
 
-    public PortalUser saveUser(PortalUser portalUser){
-        PortalUser portalUserExists = portalUserRepository.findByEmail(portalUser.getEmail());
-        if(portalUserExists !=null && !portalUserExists.equals(portalUser)){
+    public User saveUser(User user){
+        User userExists = userRepository.findByEmail(user.getEmail());
+        if(userExists !=null && !userExists.equals(user)){
             throw new BusinessException("Already exists a registered user using this email address");
         }
 
-        return portalUserRepository.save(portalUser);
+        return userRepository.save(user);
+    }
+
+    public User updateUser(User user, UserUpdateReqDTO userDTO){
+        if(user!= null && userDTO!= null){
+            user.setFirstName(userDTO.getFirstName());
+            user.setLastName(userDTO.getLastName());
+            user.setIntro(userDTO.getIntro());
+            return userRepository.save(user);
+        }
+        throw new BusinessException("User cannot be updated");
     }
 
     public void deleteUser(Long userId) {
-        Optional<PortalUser> userExists = portalUserRepository.findById(userId);
+        Optional<User> userExists = userRepository.findById(userId);
         if(!userExists.isPresent()){
             throw new BusinessException("User not found");
         }
-        portalUserRepository.deleteById(userId);
+        userRepository.deleteById(userId);
     }
 
 }

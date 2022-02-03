@@ -20,7 +20,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Table(name = "portal_user")
-public class PortalUser {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +39,7 @@ public class PortalUser {
     private String email;
     @NotNull
     @Size(max = 10)
-    private String passwordHash;
+    private String password;
     @NotNull
     private LocalDateTime registeredAt;
     @NotNull
@@ -60,7 +60,7 @@ public class PortalUser {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PortalUser other = (PortalUser) obj;
+        User other = (User) obj;
         return Objects.equals(id, other.id);
     }
 }
