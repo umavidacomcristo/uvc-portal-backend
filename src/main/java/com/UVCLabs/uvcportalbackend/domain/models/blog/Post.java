@@ -42,7 +42,7 @@ public class Post {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="user_id")
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
