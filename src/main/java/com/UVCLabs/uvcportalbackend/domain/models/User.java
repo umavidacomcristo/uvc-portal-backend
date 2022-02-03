@@ -1,19 +1,18 @@
 package com.UVCLabs.uvcportalbackend.domain.models;
 
 import com.UVCLabs.uvcportalbackend.domain.ValidationGroups;
+import com.UVCLabs.uvcportalbackend.domain.models.blog.Post;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -46,6 +45,9 @@ public class User {
     @Size(max = 50)
     private String intro;
     private LocalDateTime lastLogin;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     @Override
     public int hashCode(){
