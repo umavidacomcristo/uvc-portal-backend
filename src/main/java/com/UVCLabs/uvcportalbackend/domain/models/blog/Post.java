@@ -38,6 +38,10 @@ public class Post {
     private LocalDateTime publishedAt;
 
     @ManyToOne
+    @JoinColumn(name = "status_post_id")
+    private StatusPost statusPost;
+
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -46,7 +50,7 @@ public class Post {
     private User user;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "tag_post",
+    @JoinTable(name = "tag_post", //TODO: corrigir, ids trocados no banco
             joinColumns = {@JoinColumn(name = "tag_id",
                             nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "post_id",

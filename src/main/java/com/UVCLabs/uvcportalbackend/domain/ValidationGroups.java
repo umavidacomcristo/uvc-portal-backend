@@ -6,4 +6,5 @@ public class ValidationGroups {
     public interface CategoryId{}
     public interface TagId{}
     public interface PostId{}
+    public interface StatusPostId{}
 }

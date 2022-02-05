@@ -1,13 +1,11 @@
 package com.UVCLabs.uvcportalbackend.api.controller;
 
 import com.UVCLabs.uvcportalbackend.UvcPortalBackendApplication;
-import com.UVCLabs.uvcportalbackend.api.models.requests.CategoryRegisterDTO;
-import com.UVCLabs.uvcportalbackend.api.models.requests.TagRegisterDTO;
-import com.UVCLabs.uvcportalbackend.api.models.requests.UserRegisterReqDTO;
-import com.UVCLabs.uvcportalbackend.api.models.requests.UserUpdateReqDTO;
+import com.UVCLabs.uvcportalbackend.api.models.requests.*;
 import com.UVCLabs.uvcportalbackend.api.models.response.UserRegisterRespDTO;
 import com.UVCLabs.uvcportalbackend.domain.models.User;
 import com.UVCLabs.uvcportalbackend.domain.models.blog.Category;
+import com.UVCLabs.uvcportalbackend.domain.models.blog.Post;
 import com.UVCLabs.uvcportalbackend.domain.models.blog.Tag;
 import com.UVCLabs.uvcportalbackend.domain.repository.UserRepository;
 import com.UVCLabs.uvcportalbackend.domain.repository.blog.CategoryRepository;
@@ -49,6 +47,17 @@ public class BlogController {
     @GetMapping("/category")
     public List<Category> listAllCategories(){
         return categoryRepository.findAll();
+    }
+
+    @GetMapping("/post")
+    public List<Post> listAllPosts(){
+        return postRepository.findAll();
+    }
+
+    @PostMapping("/post/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Post addPost(@Valid @RequestBody PostRegisterDTO postRegisterDTO){
+        return blogService.savePost(postRegisterDTO);
     }
 
     @PostMapping("/category")
