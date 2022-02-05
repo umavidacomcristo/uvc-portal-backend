@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class TagRegisterDTO {
 
     @NotEmpty
-    @Size(min = 2, max = 75)
+    @Size(min = 5, max = 75)
     private String title;
 
     public TagRegisterDTO(String title) {

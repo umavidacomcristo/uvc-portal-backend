@@ -81,17 +81,3 @@ CREATE TABLE public.post (
 	CONSTRAINT fkg6l1ydp1pwkmyj166teiuov1b FOREIGN KEY (category_id) REFERENCES public.category(category_id),
 	CONSTRAINT fktm7nnes95ytj0le23aqbu4uj1 FOREIGN KEY (user_id) REFERENCES public.portal_user(id)
 );
-
-
--- public.tag_post definition
-
--- Drop table
-
--- DROP TABLE public.tag_post;
-
-CREATE TABLE public.tag_post (
-	tag_id int8 NOT NULL,
-	post_id int8 NOT NULL,
-	CONSTRAINT fkdmeht0pdksy1q0swmp980voja FOREIGN KEY (post_id) REFERENCES public.tag(tag_id),
-	CONSTRAINT fkeuwkudwt0fuqnw16ltq22vvsf FOREIGN KEY (tag_id) REFERENCES public.post(post_id)
-);

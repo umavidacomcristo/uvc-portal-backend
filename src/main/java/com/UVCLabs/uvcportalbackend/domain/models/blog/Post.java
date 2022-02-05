@@ -49,12 +49,7 @@ public class Post {
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "tag_post", //TODO: corrigir, ids trocados no banco
-            joinColumns = {@JoinColumn(name = "tag_id",
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "post_id",
-                            nullable = false, updatable = false)})
+    @ManyToMany
     private List<Tag> tags;
 
 }
