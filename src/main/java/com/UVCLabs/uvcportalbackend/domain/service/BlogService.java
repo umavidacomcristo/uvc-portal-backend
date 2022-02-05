@@ -2,6 +2,7 @@ package com.UVCLabs.uvcportalbackend.domain.service;
 
 import com.UVCLabs.uvcportalbackend.api.models.requests.CategoryRegisterDTO;
 import com.UVCLabs.uvcportalbackend.api.models.requests.PostRegisterDTO;
+import com.UVCLabs.uvcportalbackend.api.models.requests.PostStatusRequestDTO;
 import com.UVCLabs.uvcportalbackend.api.models.requests.TagRegisterDTO;
 import com.UVCLabs.uvcportalbackend.domain.exception.BusinessException;
 import com.UVCLabs.uvcportalbackend.domain.models.User;
@@ -87,6 +88,26 @@ public class BlogService {
         post.setPostContent(postRegisterDTO.getPostContent());
         post.setUser(user.get());
         return postRepository.save(post);
+    }
+
+    public Post setStatusPost(PostStatusRequestDTO postStatusRequestDTO){
+        Optional<Post> postExists = postRepository.findById(Long.valueOf(postStatusRequestDTO.getPostId()));
+        Optional<StatusPost> statusPost = statusPostRepository.findById(Long.valueOf(postStatusRequestDTO.getStatusPostId()));
+
+        if(postExists.isPresent() && statusPost.isPresent()){
+            Post post = postExists.get();
+            if(statusPost.get().getStatusName().equals("PUBLISHED")){
+                post.setPublishedAt(LocalDateTime.now());
+            }
+            if(statusPost.get().getStatusName().equals("DRAFT")){
+                post.setPublishedAt(null);
+            }
+
+            post.setStatusPost(statusPost.get());
+            return postRepository.save(post);
+        }
+
+        throw new BusinessException("Cannot set post status");
     }
 
 
