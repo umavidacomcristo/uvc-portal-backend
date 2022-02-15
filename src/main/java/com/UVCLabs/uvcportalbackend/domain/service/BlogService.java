@@ -1,9 +1,9 @@
 package com.UVCLabs.uvcportalbackend.domain.service;
 
-import com.UVCLabs.uvcportalbackend.api.models.requests.CategoryRegisterDTO;
-import com.UVCLabs.uvcportalbackend.api.models.requests.PostRegisterDTO;
-import com.UVCLabs.uvcportalbackend.api.models.requests.PostStatusRequestDTO;
-import com.UVCLabs.uvcportalbackend.api.models.requests.TagRegisterDTO;
+import com.UVCLabs.uvcportalbackend.api.dto.requests.CategoryRegisterDTO;
+import com.UVCLabs.uvcportalbackend.api.dto.requests.PostRegisterDTO;
+import com.UVCLabs.uvcportalbackend.api.dto.requests.PostStatusRequestDTO;
+import com.UVCLabs.uvcportalbackend.api.dto.requests.TagRegisterDTO;
 import com.UVCLabs.uvcportalbackend.domain.exception.BusinessException;
 import com.UVCLabs.uvcportalbackend.domain.models.User;
 import com.UVCLabs.uvcportalbackend.domain.models.blog.Category;

@@ -37,7 +37,7 @@ public class User {
     @Size(max = 50)
     private String email;
     @NotNull
-    @Size(max = 10)
+    @Size(max = 255)
     private String password;
     @NotNull
     private LocalDateTime registeredAt;
@@ -45,6 +45,9 @@ public class User {
     @Size(max = 50)
     private String intro;
     private LocalDateTime lastLogin;
+
+    @NotNull
+    private boolean isAdmin;
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts;

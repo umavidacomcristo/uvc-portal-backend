@@ -1,4 +1,5 @@
-package com.UVCLabs.uvcportalbackend.api.models.response;
+package com.UVCLabs.uvcportalbackend.api.dto.response;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,22 +9,20 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryResponseDTO {
-    @NotEmpty
+public class TagResponseDTO {
+
     @Id
-    private Long categoryId;
+    @NotEmpty
+    private Long tagId;
     @NotEmpty
     @Size(min = 5, max = 75)
     private String title;
-    @NotEmpty
-    @Size(min = 5, max = 75)
-    private String metaTitle;
 
-    public CategoryResponseDTO(String title, String metaTitle) {
+    public TagResponseDTO(String title) {
         this.title = title;
-        this.metaTitle = metaTitle;
     }
 }

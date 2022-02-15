@@ -1,16 +1,13 @@
 package com.UVCLabs.uvcportalbackend.api.controller;
 
 import com.UVCLabs.uvcportalbackend.UvcPortalBackendApplication;
-import com.UVCLabs.uvcportalbackend.api.models.requests.*;
-import com.UVCLabs.uvcportalbackend.api.models.response.CategoryResponseDTO;
-import com.UVCLabs.uvcportalbackend.api.models.response.PostResponseDTO;
-import com.UVCLabs.uvcportalbackend.api.models.response.TagResponseDTO;
-import com.UVCLabs.uvcportalbackend.api.models.response.UserRegisterRespDTO;
-import com.UVCLabs.uvcportalbackend.domain.models.User;
+import com.UVCLabs.uvcportalbackend.api.dto.requests.*;
+import com.UVCLabs.uvcportalbackend.api.dto.response.CategoryResponseDTO;
+import com.UVCLabs.uvcportalbackend.api.dto.response.PostResponseDTO;
+import com.UVCLabs.uvcportalbackend.api.dto.response.TagResponseDTO;
 import com.UVCLabs.uvcportalbackend.domain.models.blog.Category;
 import com.UVCLabs.uvcportalbackend.domain.models.blog.Post;
 import com.UVCLabs.uvcportalbackend.domain.models.blog.Tag;
-import com.UVCLabs.uvcportalbackend.domain.repository.UserRepository;
 import com.UVCLabs.uvcportalbackend.domain.repository.blog.CategoryRepository;
 import com.UVCLabs.uvcportalbackend.domain.repository.blog.PostRepository;
 import com.UVCLabs.uvcportalbackend.domain.repository.blog.TagRepository;
@@ -29,7 +26,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/blog")
+@RequestMapping("/v1")
 public class BlogController {
     private static final Logger LOGGER= LoggerFactory.getLogger(UvcPortalBackendApplication.class);
     @Autowired
@@ -43,48 +40,48 @@ public class BlogController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("/tag")
+    @GetMapping("/public/blog/tag")
     public List<TagResponseDTO> listAllTags(){
         return toTagCollectionDTO(tagRepository.findAll());
     }
 
-    @GetMapping("/category")
+    @GetMapping("/public/blog/category")
     public List<CategoryResponseDTO> listAllCategories(){
         return toCategoryCollectionDTO(categoryRepository.findAll());
     }
 
-    @GetMapping("/post")
+    @GetMapping("/public/blog/post")
     public List<PostResponseDTO> listAllPosts(){
         return toPostCollectionDTO(postRepository.findAll());
     }
 
-    @PostMapping("/post/create")
+    @PostMapping("/admin/blog/post/create")
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponseDTO addPost(@Valid @RequestBody PostRegisterDTO postRegisterDTO){
         return toPostDTO(blogService.savePost(postRegisterDTO));
     }
 
-    @PutMapping("/post/updateStatus")
+    @PutMapping("/admin/blog/post/updateStatus")
     @ResponseStatus(HttpStatus.OK)
     public PostResponseDTO modifyPostStatus(@Valid @RequestBody PostStatusRequestDTO postStatusRequestDTO){
         return toPostDTO(blogService.setStatusPost(postStatusRequestDTO));
     }
 
-    @PostMapping("/category")
+    @PostMapping("/admin/blog/category")
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryResponseDTO addCategory(@Valid @RequestBody CategoryRegisterDTO categoryRegisterDTO){
         LOGGER.info("Creating a new category!");
         return toCategoryDTO(blogService.saveCategory(toDomainCategory(categoryRegisterDTO)));
     }
 
-    @PostMapping("/tag")
+    @PostMapping("/admin/blog/tag")
     @ResponseStatus(HttpStatus.CREATED)
     public TagResponseDTO addTag(@Valid @RequestBody TagRegisterDTO tagRegisterDTO){
         LOGGER.info("Creating a new tag!");
         return toTagDTO(blogService.saveTag(toDomainTag(tagRegisterDTO)));
     }
 
-    @PutMapping("/category/{categoryId}")
+    @PutMapping("/admin/blog/category/{categoryId}")
     public ResponseEntity<CategoryResponseDTO> updateCategory(@Valid  @PathVariable Long categoryId, @RequestBody CategoryRegisterDTO categoryUpdateReqDTO){
         Optional<Category> category = categoryRepository.findById(categoryId);
         if(!category.isPresent()) {
@@ -96,7 +93,7 @@ public class BlogController {
         return ResponseEntity.ok(toCategoryDTO(updatedCategory));
     }
 
-    @PutMapping("/tag/{tagId}")
+    @PutMapping("/admin/blog/tag/{tagId}")
     public ResponseEntity<TagResponseDTO> updateTag(@Valid  @PathVariable Long tagId, @RequestBody TagRegisterDTO tagRegisterDTO){
         Optional<Tag> tag = tagRepository.findById(tagId);
         if(!tag.isPresent()) {

@@ -1,4 +1,4 @@
-package com.UVCLabs.uvcportalbackend.api.models.response;
+package com.UVCLabs.uvcportalbackend.api.dto.response;
 
 
 import lombok.Getter;

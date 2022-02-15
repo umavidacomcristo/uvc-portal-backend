@@ -1,21 +1,20 @@
-package com.UVCLabs.uvcportalbackend.api.models.requests;
+package com.UVCLabs.uvcportalbackend.api.dto.response;
 
-import com.UVCLabs.uvcportalbackend.domain.models.blog.Post;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryRegisterDTO {
+public class CategoryResponseDTO {
+    @NotEmpty
+    @Id
+    private Long categoryId;
     @NotEmpty
     @Size(min = 5, max = 75)
     private String title;
@@ -23,7 +22,7 @@ public class CategoryRegisterDTO {
     @Size(min = 5, max = 75)
     private String metaTitle;
 
-    public CategoryRegisterDTO(String title, String metaTitle) {
+    public CategoryResponseDTO(String title, String metaTitle) {
         this.title = title;
         this.metaTitle = metaTitle;
     }

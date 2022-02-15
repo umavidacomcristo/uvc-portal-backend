@@ -1,4 +1,4 @@
-package com.UVCLabs.uvcportalbackend.api.models.requests;
+package com.UVCLabs.uvcportalbackend.api.dto.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +11,13 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserRegisterReqDTO {
+public class UserRegisterRespDTO {
     @NotEmpty
     @Size(min = 2, max = 20)
     private String firstName;
     @NotEmpty
     @Size(min = 2, max = 20)
     private String lastName;
-    @NotEmpty
-    @Size(min = 10, max = 10)
-    private String password;
 
     @Email
     @NotEmpty
@@ -31,10 +28,9 @@ public class UserRegisterReqDTO {
     @Size(max = 50)
     private String intro;
 
-    public UserRegisterReqDTO(String firstName, String lastName, String password, String email, String intro) {
+    public UserRegisterRespDTO(String firstName, String lastName, String email, String intro) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.email = email;
         this.intro = intro;
     }

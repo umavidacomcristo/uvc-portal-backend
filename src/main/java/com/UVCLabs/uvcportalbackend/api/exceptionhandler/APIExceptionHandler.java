@@ -25,4 +25,15 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
         return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleBusiness(Exception ex, WebRequest request){
+        var status = HttpStatus.BAD_REQUEST;
+        var error = new Message();
+        error.setStatus(status.value());
+        error.setTitle(ex.getMessage());
+        error.setDate(LocalDateTime.now());
+
+        return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+    }
 }
