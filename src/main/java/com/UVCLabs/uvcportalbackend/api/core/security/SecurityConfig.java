@@ -20,13 +20,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/*/auth/**").permitAll()
                 .antMatchers("/*/public/**").permitAll()
                 .antMatchers("/*/admin/**").hasRole("ADMIN")
                 .antMatchers("/*/user/**").hasRole("USER")
                 .and()
-                .httpBasic()
-                .and().csrf().disable();
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), customUserDetailService));
+
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
