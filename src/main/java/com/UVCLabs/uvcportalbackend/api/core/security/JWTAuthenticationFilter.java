@@ -2,8 +2,10 @@ package com.UVCLabs.uvcportalbackend.api.core.security;
 
 import com.UVCLabs.uvcportalbackend.domain.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.json.simple.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import static com.UVCLabs.uvcportalbackend.api.core.security.SecurityConstants.*;
@@ -47,5 +50,14 @@ public class JWTAuthenticationFilter  extends UsernamePasswordAuthenticationFilt
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        JSONObject jsonResponse = new JSONObject();
+        jsonResponse.put("username", username);
+        jsonResponse.put("expiration_time", EXPIRATION_TIME);
+        jsonResponse.put("token", token);
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(jsonResponse.toString());
+        out.flush();
     }
 }
