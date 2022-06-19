@@ -1,0 +1,1 @@
+ALTER TABLE public.post ALTER COLUMN summary SET NOT NULL;

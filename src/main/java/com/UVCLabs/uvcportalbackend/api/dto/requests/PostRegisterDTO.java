@@ -19,9 +19,8 @@ public class PostRegisterDTO {
     @NotEmpty
     @Size(min = 5, max = 75)
     private String title;
-    @NotEmpty
-    @Size(min = 5, max = 100)
     private String summary;
+
     @NotEmpty
     private String postContent;
 

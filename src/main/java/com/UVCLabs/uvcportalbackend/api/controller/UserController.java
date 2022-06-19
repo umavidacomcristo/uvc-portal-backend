@@ -37,7 +37,7 @@ public class UserController {
         return toUserCollectionDTO(userRepository.findAll());
     }
 
-    @PostMapping("/admin/users/create")
+    @PostMapping("/users/create")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDTO saveUser(@Valid @RequestBody UserRegisterReqDTO userRegisterReqDTO) {
         User user = manageUserService.saveUser(toDomain(userRegisterReqDTO));

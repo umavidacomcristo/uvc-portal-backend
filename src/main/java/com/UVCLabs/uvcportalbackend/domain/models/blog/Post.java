@@ -24,8 +24,7 @@ public class Post {
     @NotNull
     @Size(min = 5, max = 75)
     private String title;
-    @NotNull
-    @Size(min = 5, max = 100)
+
     private String summary;
 
     @NotNull
