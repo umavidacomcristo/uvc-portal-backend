@@ -51,8 +51,13 @@ public class BlogController {
     }
 
     @GetMapping("/public/blog/post")
-    public List<PostResponseDTO> listAllPosts(){
-        return toPostCollectionDTO(postRepository.findAll());
+    public List<PostResponseDTO> listPublicPosts(){
+        return toPostCollectionDTO(blogService.getPublishedPost("PUBLISHED"));
+    }
+
+    @GetMapping("/admin/blog/post")
+    public List<PostResponseDTO> listPostByStatus(@RequestParam(name = "statusName")  String statusName){
+        return toPostCollectionDTO(blogService.getPublishedPost(statusName.toUpperCase()));
     }
 
     @PostMapping("/admin/blog/post/create")
